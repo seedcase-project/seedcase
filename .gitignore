@@ -1,0 +1,11 @@
+# Filtering out IDE specific folders
+.idea
+
+# Don't include the env files
+.env
+.env.*
+**/.env.*
+
+# Ignore mac files
+.DS_Store
+

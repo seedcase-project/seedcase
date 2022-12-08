@@ -1,0 +1,16 @@
+# Django Settings
+DEVELOPMENT=1
+
+# Please Update the username, email, and password below for the default django admin user login
+DJANGO_SUPERUSER_USERNAME=
+DJANGO_SUPERUSER_EMAIL=
+DJANGO_SUPERUSER_PASSWORD=
+
+# Database settings, you could update the database setting below
+SQL_ENGINE=django.db.backends.postgresql
+DATABASE=postgres
+SQL_HOST=db
+SQL_PORT=5432
+POSTGRES_DB=dif_database
+POSTGRES_USER=dif_database
+POSTGRES_PASSWORD=dif_database

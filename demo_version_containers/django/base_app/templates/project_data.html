@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ <div class="container-width" id="iumf">
+               <div class="logo-container"></div>
+               <nav class="menu" id="ituj">
+                  <div class="menu-item" id="i7b2"><a href="/project_app/"><h3>Data List</h3></a></div>
+                  <div class="menu-item" id="i7b2"><a href="/projects/"><h3>Projects</h3></a></div>
+                  <div class="menu-item" id="i7b2"><a href="/organizations/"><h3>Organizations</h3></a></div>
+                  <div class="menu-item" id="i6uff"><a href="/"><h3>Home</h3></a></div>
+               </nav>
+               <div class="clearfix"></div>
+            </div>
+
+<p>
+
+<table class="table" style="width:40%; margin: 0px auto;">
+  <thead>
+    <tr>
+      <th scope="col-8">#</th>
+      <th scope="col-8">Project Name</th>
+      <th scope="col-8">Project Data Label</th>
+      <th scope="col-8">Description</th>
+      <th scope="col-8">Data Set</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% for data_obj in project_data_list %}
+            <tr>
+                <th >{{data_obj.id}}</th>
+                <td> {{data_obj.project.name}}</td>
+                <td>{{data_obj.label}}</td>
+                <td>{{data_obj.description}}</td>
+                <td><a href="api/data_list/{{data_obj.id}}/">View Data</a></td>
+
+            </tr>
+        {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
