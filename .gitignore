@@ -9,3 +9,4 @@
 # Ignore mac files
 .DS_Store
 
+.Rproj.user
