@@ -1,7 +1,5 @@
 -- Creates four tables in the public. schema to contain the 100 Patients data in the correct format
 -- Runs a version of ETL on the data from the raw. tables to the public.
--- Author: Kris Beicher
--- Date 26th Jan 2023
 
 CREATE TABLE IF NOT EXISTS public.patient_core (
     Patient_id VARCHAR(100),
@@ -15,11 +13,11 @@ CREATE TABLE IF NOT EXISTS public.patient_core (
 
 TRUNCATE TABLE public.patient_core;
 
-INSERT INTO public.patient_core (Patient_id, 
-                                 Patient_gender, 
-                                 Patient_dob, 
-                                 Patient_race, 
-                                 Patient_marital_status, 
+INSERT INTO public.patient_core (Patient_id,
+                                 Patient_gender,
+                                 Patient_dob,
+                                 Patient_race,
+                                 Patient_marital_status,
                                  Patient_language,
                                  Patient_percentage_below_poverty)
 SELECT PC.Patient_id
@@ -28,7 +26,7 @@ SELECT PC.Patient_id
       ,PC.Patient_race
       ,PC.patient_marital_status
       ,PC.patient_language
-      ,TO_NUMBER(REPLACE(PC.Patient_percentage_below_poverty, ',','.'), '999D99') 
+      ,TO_NUMBER(REPLACE(PC.Patient_percentage_below_poverty, ',','.'), '999D99')
       -- please note, the REPLACE is due to the devs version of Excel playing silly buggers with the number format (Danish organisation with UK installation of Office)
 FROM raw.patient_core_populated PC;
 
@@ -45,7 +43,7 @@ TRUNCATE TABLE public.lab_core;
 
 INSERT INTO public.lab_core (Patient_id,
                              Admission_id,
-                             Lab_name, 
+                             Lab_name,
                              Lab_value,
                              Lab_units,
                              Lab_Date_time

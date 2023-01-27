@@ -2,8 +2,6 @@
 -- Imports the data from the csv files
 -- Prior to running the script make sure that the four files are copied into a suitable folder in the Docker container
 -- In the original script they got stored in a folder called /imports/
--- Author: Kris Beicher
--- Date 25th Jan 2023
 
 CREATE SCHEMA IF NOT EXISTS raw;
 
@@ -58,19 +56,19 @@ COPY raw.admissions_diagnoses_core_populated FROM '/imports/AdmissionsDiagnosesC
 
 /*
 --check that the data has gone into the tables
-SELECT * 
+SELECT *
 FROM "raw"."admissions_core_populated"
 LIMIT 2;
 
-SELECT * 
+SELECT *
 FROM "raw"."admissions_diagnoses_core_populated"
 LIMIT 2;
 
-SELECT * 
+SELECT *
 FROM "raw"."lab_core_populated"
 LIMIT 2;
 
-SELECT * 
+SELECT *
 FROM "raw"."patient_core_populated"
 LIMIT 2;
 */
