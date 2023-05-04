@@ -1,0 +1,19 @@
+# Django development mode setting. If set it to 1, it will clear everything and reset everything every time up the
+# containers. If set it to 0, you could keep everything in the database.
+DEVELOPMENT=0
+# If need to create super user set to 1, if it is not set to 0
+CREATE_SUPERUSER=1
+
+# Please Update the username, email, and password below for the default django admin user login
+DJANGO_SUPERUSER_USERNAME=
+DJANGO_SUPERUSER_EMAIL=
+DJANGO_SUPERUSER_PASSWORD=
+
+# Database settings, you could update the database setting below
+SQL_ENGINE=django.db.backends.postgresql
+DATABASE=postgres
+SQL_HOST=db
+SQL_PORT=5432
+POSTGRES_DB=dif_database
+POSTGRES_USER=dif_database
+POSTGRES_PASSWORD=dif_database

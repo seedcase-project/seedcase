@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+ <div class="container-width" id="iumf">
+               <div class="logo-container"></div>
+               <nav class="menu" id="ituj">
+                   <div class="menu-item" id="i7b2"><a href="/project_app/"><h3>Data List</h3></a></div>
+                  <div class="menu-item" id="i7b2"><a href="/projects/"><h3>Projects</h3></a></div>
+                  <div class="menu-item" id="i7b2"><a href="/organizations/"><h3>Organizations</h3></a></div>
+                  <div class="menu-item" id="i6uff"><a href="/"><h3>Home</h3></a></div>
+               </nav>
+               <div class="clearfix"></div>
+            </div>
+
+<table class="table" style="width:40%; margin: 0px auto;">
+  <thead>
+    <tr>
+      <th scope="col-8">#</th>
+      <th scope="col-8">Organization Name</th>
+      <th scope="col-8">Organization Address</th>
+      <th scope="col-8">Organization City</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% for organization in organization_list %}
+            <tr>
+                <th >{{organization.id}}</th>
+                <td> {{organization.name}}</td>
+                <td>{{organization.address}}</td>
+                <td>{{organization.city}}</td>
+            </tr>
+        {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
