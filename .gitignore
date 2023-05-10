@@ -9,5 +9,5 @@
 # Ignore mac files
 .DS_Store
 
+# Ignore R project files
 .Rproj.user
-*.Rproj
