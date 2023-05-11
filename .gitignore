@@ -11,3 +11,10 @@
 
 .Rproj.user
 *.Rproj
+
+# Ignore test coverages and results
+htmlcov/
+junit/
+coverage.xml
+.coverage
+
