@@ -9,6 +9,7 @@
 # Ignore mac files
 .DS_Store
 
+# Ignore R project files
 .Rproj.user
 *.Rproj
 
@@ -17,4 +18,5 @@ htmlcov/
 junit/
 coverage.xml
 .coverage
+
 

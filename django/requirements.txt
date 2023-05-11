@@ -12,5 +12,6 @@ requests==2.18.4
 django-createsuperuser
 django-bootstrap-v5==1.0.11
 pytz==2022.4
-pytest-django == 3.8.0
-pytest-cov == 2.8.1
+pytest-django==3.8.0
+pytest-cov==2.8.1
+drf-yasg==1.21.5

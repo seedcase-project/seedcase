@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django_createsuperuser',
     'rest_framework',
     'base_app',
-    'project_app'
+    'project_app',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
