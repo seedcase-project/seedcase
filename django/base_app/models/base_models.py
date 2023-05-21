@@ -7,6 +7,7 @@ This file contains the base app defaul base django model
 from django.db import models
 from django.db.utils import IntegrityError
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 class BaseManager(models.Manager):
@@ -121,3 +122,13 @@ class Address(models.Model):
         if self.postal_code:
             fields_to_display.append(self.postal_code)
         return '\n'.join(fields_to_display)
+
+class UploadedFile(models.Model):
+    """
+    Store and return the uploaded the files info
+    """
+    file = models.FileField(upload_to='datafile/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.file.name

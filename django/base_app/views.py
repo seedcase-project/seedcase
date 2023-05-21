@@ -7,10 +7,11 @@ This file contains the base app API functions
 from django.shortcuts import render
 from .models.organizations import Organization, OrganizationType
 from .models.projects import Project
+from .models import UploadedFile
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from .serializers import FileSerializer
 
 def _serialize_organization_type(org_type):
     return {
@@ -69,3 +70,27 @@ def project_list(request):
     project_all = Project.objects.all()
     context['project_list'] = project_all
     return render(request, 'projects.html', context)
+
+@api_view(['POST', 'GET'])
+def raw_file_upload(request, format=None):
+    """
+    List all uploaded the files.
+    Post to upload the file to the endpoint.
+    """
+    if request.method == 'GET':
+        files = UploadedFile.objects.all()
+        serializer = FileSerializer(files, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        if request.user.groups.filter(name='Researcher').exists():
+            serializer = FileSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors,
+                                status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response("You are not authorized to use this API",
+                            status=status.HTTP_401_UNAUTHORIZED)
