@@ -18,8 +18,7 @@ from django.urls import path
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from .views import home_page, organization_list, project_list, all_organizations
-from project_app.urls import urlpatterns as project_app_urls
+from .views import home_page, organization_list, all_organizations
 
 # Setup default API View
 schema_view = get_schema_view(
@@ -41,12 +40,10 @@ urlpatterns = [
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0),
          name='schema-swagger-ui'),
     path('organizations/', organization_list, name='organizations'),
-    path('projects/', project_list, name='projects'),
     path('api/organizations/', all_organizations, name='api_organizations'),
 ]
 
 # Add other apps url to the base app
-urlpatterns += project_app_urls
 
 admin.site.index_title = "Seedcase Portal Administration"
 admin.site.site_header = "Seedcase Portal Administration"
