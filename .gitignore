@@ -11,3 +11,6 @@
 
 # Ignore R project files
 .Rproj.user
+
+# Ignore local data files
+django/datafile/*
