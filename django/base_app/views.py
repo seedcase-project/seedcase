@@ -3,7 +3,6 @@ This file contains the base app API functions
 -------------------------------------------------------------------------------
 """
 
-
 from django.shortcuts import render
 from .models.organizations import Organization, OrganizationType
 from .models.projects import Project
@@ -11,7 +10,11 @@ from .models import UploadedFile
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.parsers import FileUploadParser
 from .serializers import FileSerializer
+
+
+
 
 def _serialize_organization_type(org_type):
     return {
@@ -43,12 +46,15 @@ def all_organizations(request, type=None):
             try:
                 org_type = OrganizationType.objects.get(pk=type_id)
             except OrganizationType.DoesNotExist:
-                return Response(_('OrganizationType {} not found').format(type), status=status.HTTP_404_NOT_FOUND)
+                return Response(_('OrganizationType {} not found').format(type),
+                                status=status.HTTP_404_NOT_FOUND)
         except ValueError:
             try:
                 org_type = OrganizationType.objects.get(name=str(type))
-            except (OrganizationType.DoesNotExist, OrganizationType.MultipleObjectsReturned):
-                return Response(_('OrganizationType {} not found').format(type), status=status.HTTP_404_NOT_FOUND)
+            except (OrganizationType.DoesNotExist,
+                    OrganizationType.MultipleObjectsReturned):
+                return Response(_('OrganizationType {} not found').format(type),
+                                status=status.HTTP_404_NOT_FOUND)
         orgs = orgs.filter(types=org_type)
     org_objects = [_serialize_organization(org) for org in orgs]
     return Response(org_objects)
@@ -71,12 +77,15 @@ def project_list(request):
     context['project_list'] = project_all
     return render(request, 'projects.html', context)
 
+
 @api_view(['POST', 'GET'])
 def raw_file_upload(request, format=None):
     """
-    List all uploaded the files.
+    List all uploaded files.
     Post to upload the file to the endpoint.
     """
+    parser_classes = [FileUploadParser]  # Specify the file upload parser
+
     if request.method == 'GET':
         files = UploadedFile.objects.all()
         serializer = FileSerializer(files, many=True)
@@ -84,12 +93,14 @@ def raw_file_upload(request, format=None):
 
     elif request.method == 'POST':
         if request.user.groups.filter(name='Researcher').exists():
-            serializer = FileSerializer(data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            file_serializer = FileSerializer(data=request.data)
+
+            if file_serializer.is_valid():
+                file_serializer.save()
+                return Response(file_serializer.data,
+                                status=status.HTTP_201_CREATED)
             else:
-                return Response(serializer.errors,
+                return Response(file_serializer.errors,
                                 status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response("You are not authorized to use this API",
