@@ -90,10 +90,14 @@ stored in the local computer. To start the container again, run the same
 command like above except without the `--build`, since you've already
 built the image.
 
+``` bash
+docker compose -f docker-compose.yml up -d
+```
 
 ## Build and run tests
 To build, start and run all tests, run the command under the main 
-`seedcase/` folder
+`seedcase/` folder. Please utilize this script to ensure the successful 
+completion of all tests following any modifications made to the code.
 
 ``` bash
 sh integration_build.sh
