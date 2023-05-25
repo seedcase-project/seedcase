@@ -3,7 +3,8 @@
 ## Download and install Docker
 
 Please download the Docker for your operating system from this link
-<https://docs.docker.com/get-docker/>
+<https://docs.docker.com/get-docker/>. There are several steps involved,
+make sure to do them all for your operating system.
 
 Your will download and install the Docker engine and Docker's user
 friendly application as Docker desktop. Please follow the instruction to
@@ -63,8 +64,10 @@ Docker will then try to download all the required packages, make an
 image to the local computer, and try to run it. Once done, it should
 print something like:
 
-    ⠿ Container demo_version_containers-db-1          Started       0.3s
-    ⠿ Container django_webapp                         Started       0.5s
+```         
+⠿ Container demo_version_containers-db-1          Started       0.3s
+⠿ Container django_webapp                         Started       0.5s
+```
 
 Which indicates that Docker is ready.
 
@@ -95,8 +98,9 @@ docker compose -f docker-compose.yml up -d
 ```
 
 ## Build and run tests
-To build, start and run all tests, run the command under the main 
-`seedcase/` folder. Please utilize this script to ensure the successful 
+
+To build, start and run all tests, run the command under the main
+`seedcase/` folder. Please utilize this script to ensure the successful
 completion of all tests following any modifications made to the code.
 
 ``` bash
