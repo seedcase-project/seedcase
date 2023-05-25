@@ -8,7 +8,7 @@ from base_app.models.organizations import *
 @pytest.mark.django_db
 def test_organization_creation():
     """
-    Test organization creation
+    Test that the organization is created correctly.
     """
     org_type = OrganizationType.objects.create(name='University', description='University organization')
     org = Organization.objects.create(name='Test Organization', note='This is a test organization')
@@ -20,7 +20,7 @@ def test_organization_creation():
 @pytest.mark.django_db
 def test_organization_type_creation():
     """
-    Test organization type creation
+    Test that organization type is created correctly.
     """
     org_type = OrganizationType.objects.create(name='University', description='University organization')
     assert org_type.name == 'University'
