@@ -11,6 +11,7 @@ RUN apk update; \
 COPY requirements.txt requirements.txt
 RUN python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
+RUN apk add curl
 
 COPY . .
 
