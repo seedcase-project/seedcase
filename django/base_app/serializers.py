@@ -7,6 +7,6 @@ class FileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        file = validated_data['file']  # Assuming the field name for the file is 'file'
+        file = validated_data['file']
         uploaded_file = DataFile.objects.create(file=file)
         return uploaded_file
