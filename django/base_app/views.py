@@ -6,14 +6,12 @@ This file contains the base app API functions
 from django.shortcuts import render
 from .models.organizations import Organization, OrganizationType
 from .models.projects import Project
-from .models import UploadedFile
+from .models import DataFile
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
 from .serializers import FileSerializer
-
-
 
 
 def _serialize_organization_type(org_type):
@@ -79,15 +77,15 @@ def project_list(request):
 
 
 @api_view(['POST', 'GET'])
-def raw_file_upload(request, format=None):
+def data_files(request, format=None):
     """
-    List all uploaded files.
+    Call this function List all uploaded data files.
     Post to upload the file to the endpoint.
     """
     parser_classes = [FileUploadParser]  # Specify the file upload parser
 
     if request.method == 'GET':
-        files = UploadedFile.objects.all()
+        files = DataFile.objects.all()
         serializer = FileSerializer(files, many=True)
         return Response(serializer.data)
 

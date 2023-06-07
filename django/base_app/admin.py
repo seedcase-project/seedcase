@@ -6,7 +6,7 @@ Developed by Richard Ding
 
 from django.contrib import admin
 from django.http import HttpResponse
-from .models import Organization, OrganizationType, Project, UploadedFile
+from .models import Organization, OrganizationType, Project, DataFile
 
 
 @admin.register(OrganizationType)
@@ -49,8 +49,8 @@ class ProjectAdmin(admin.ModelAdmin):
             list(proj.team_member.values_list('username', flat=True)))
 
 
-@admin.register(UploadedFile)
-class UploadedFileAdmin(admin.ModelAdmin):
+@admin.register(DataFile)
+class DataFileAdmin(admin.ModelAdmin):
     list_display = ('file', 'uploaded_at')
 
     def download_file(self, obj):
