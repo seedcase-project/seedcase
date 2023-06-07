@@ -22,7 +22,7 @@ from drf_yasg import openapi
 from .views import home_page, organization_list, project_list, all_organizations
 from .views import data_files
 from project_app.urls import urlpatterns as project_app_urls
-from django.conf import settings
+from .settings import DATA_FILE_URL, DATA_FILE_ROOT
 
 # Setup default API View
 schema_view = get_schema_view(
@@ -46,9 +46,8 @@ urlpatterns = [
     path('organizations/', organization_list, name='organizations'),
     path('projects/', project_list, name='projects'),
     path('api/organizations/', all_organizations, name='api_organizations'),
-    path('datafile/', data_files, name='data_files'),
-    re_path(r'^datafile/(?P<path>.*)$', serve, {'document_root':
-                                          settings.DATA_FILE_ROOT}),
+    path(DATA_FILE_URL, data_files, name='data_files'),
+    re_path(r'^datafile/(?P<path>.*)$', serve, {'document_root':DATA_FILE_ROOT}),
 ]
 
 # Add other apps url to the base app

@@ -153,4 +153,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Add data file default path
 DATA_FILE_ROOT = os.path.join(BASE_DIR, 'datafile')
-DATA_FILE_URL = '/datafile/'
+DATA_FILE_URL = 'datafile/'
+

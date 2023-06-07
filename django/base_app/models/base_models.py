@@ -7,8 +7,7 @@ This file contains the base app defaul base django model
 from django.db import models
 from django.db.utils import IntegrityError
 from django.contrib.auth.models import User
-from django.conf import settings
-
+from ..settings import DATA_FILE_URL
 
 class BaseManager(models.Manager):
     """
@@ -127,7 +126,7 @@ class DataFile(models.Model):
     """
     Store and return the uploaded the data files info
     """
-    file = models.FileField(upload_to='datafile/')
+    file = models.FileField(upload_to=DATA_FILE_URL)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
