@@ -16,7 +16,7 @@ if [ ${DEVELOPMENT:-0} == 1 ]; then
   python manage.py flush --no-input || fail_deploy "Flush Failed"
 fi
 
-python manage.py makemigrations || fail_deploy "Make Migration Failed"
+yes | python manage.py makemigrations || fail_deploy "Make Migration Failed"
 python manage.py migrate --run-syncdb || fail_deploy "Migrate Failed"
 
 # If the development flag is set, use env superuser info to create default user

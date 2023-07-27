@@ -3,10 +3,15 @@ version: "3.9"
 services:
   web:
     build:
-      context: ./django
-    image: dif-django
-    container_name: django_webapp
+      context: ./seedcase
+    image: seedcase
+    container_name: seedcase_webapp
     command: python manage.py runserver 0.0.0.0:8080
+    healthcheck:
+      test: curl --fail http://localhost:8080 || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 10
     env_file:
       - .env.django
     volumes:

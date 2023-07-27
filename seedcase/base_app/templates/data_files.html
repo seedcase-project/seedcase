@@ -1,0 +1,36 @@
+<!-- data_files.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Files</title>
+</head>
+<body>
+    <h1>Data Files</h1>
+
+    <!-- File Upload Form -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- File List -->
+    <h2>Uploaded Files</h2>
+    {% if files %}
+        <ul>
+            {% for file in files %}
+                <li>
+                    <a href="{{ file.file }}">{{ file.file }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No files uploaded yet.</p>
+    {% endif %}
+
+    <!-- Display Error Messages -->
+    {% if error %}
+        <p>Error: {{ error }}</p>
+    {% endif %}
+</body>
+</html>
