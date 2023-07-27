@@ -14,7 +14,7 @@ class DataFilesTestCase(TestCase):
     Test the data file API endpoint
     """
 
-    def setUp(self):
+    def set_up(self):
         self.factory = APIRequestFactory()
         self.client = APIClient()
         self.parser = FileUploadParser()
@@ -61,7 +61,7 @@ class DataFilesTestCase(TestCase):
             DataFile.objects.filter(
                 file__icontains=self.test_file_name).exists())
 
-    def tearDown(self):
+    def tear_down(self):
         """
         Close the file and clean the test files
         """
