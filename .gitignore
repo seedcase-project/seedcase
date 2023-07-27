@@ -20,4 +20,4 @@ coverage.xml
 .coverage
 
 # Ignore local data files
-django/datafile/*
+seedcase/datafile/*
