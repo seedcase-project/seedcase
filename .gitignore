@@ -19,4 +19,5 @@ junit/
 coverage.xml
 .coverage
 
-
+# Ignore local data files
+seedcase/datafile/*

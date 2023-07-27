@@ -14,12 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.views.static import serve
+from django.urls import path, re_path
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from .views import home_page, organization_list, project_list, all_organizations
+from .views import data_files
 from project_app.urls import urlpatterns as project_app_urls
+from .settings import DATA_FILE_URL, DATA_FILE_ROOT
 
 # Setup default API View
 schema_view = get_schema_view(
@@ -43,6 +46,8 @@ urlpatterns = [
     path('organizations/', organization_list, name='organizations'),
     path('projects/', project_list, name='projects'),
     path('api/organizations/', all_organizations, name='api_organizations'),
+    path(DATA_FILE_URL, data_files, name='data_files'),
+    re_path(r'^datafile/(?P<path>.*)$', serve, {'document_root':DATA_FILE_ROOT}),
 ]
 
 # Add other apps url to the base app

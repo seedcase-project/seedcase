@@ -150,3 +150,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Add data file default path
+DATA_FILE_ROOT = os.path.join(BASE_DIR, 'datafile')
+DATA_FILE_URL = 'datafile/'
+

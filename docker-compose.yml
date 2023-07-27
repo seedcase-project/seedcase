@@ -3,8 +3,8 @@ version: "3.9"
 services:
   web:
     build:
-      context: ./django
-    image: dif-django
+      context: ./seedcase
+    image: seedcase
     container_name: seedcase_webapp
     command: python manage.py runserver 0.0.0.0:8080
     healthcheck:
