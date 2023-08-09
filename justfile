@@ -1,6 +1,6 @@
 # Install necessary Python packages
 install-py-deps:
-  python3 -m pip install -r requirements.txt
+  python3 -m pip install -r seedcase/requirements.txt
 
 # Start up the docker container (with build)
 start-docker:
