@@ -5,22 +5,37 @@ This file contains the project data app django admin configurations
 
 from django.contrib import admin
 from base_app.models import Project
-from .models import Participant
+from .models import ObservationalUnit
 
 
-class ParticipantAdmin(admin.ModelAdmin):
+class ObservationalUnitAdmin(admin.ModelAdmin):
+    """
+    List all the information in the table on the observational unit.
+    """
+
     list_display = (
-        "participant_id",
-        "project",
-        "gender",
-        "date_of_birth",
-        "race",
-        "marital_status",
-        "language",
+        "observational_unit_id",
+        "collection_datetime",
+        "project"
     )
-    list_filter = ("project",)
+    list_filter = ("project")
 
     def get_queryset(self, request):
+        """
+        get_queryset Function to limit the query of the table to only those with
+        admin permissions.
+
+        Parameters
+        ----------
+        request : _type_
+            Which data to show when querying the table.
+
+        Returns
+        -------
+        _type_
+            _description_
+        """
+        
         # Retrieve the IDs of projects where the user is a team member
         team_member_projects = Project.objects.filter(
             team_member=request.user
@@ -33,4 +48,4 @@ class ParticipantAdmin(admin.ModelAdmin):
         return queryset
 
 
-admin.site.register(Participant, ParticipantAdmin)
+admin.site.register(ObservationalUnit, ObservationalUnitAdmin)
