@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('base_app', '0005_rename_uploadedfile_datafile_alter_datafile_options'),
+        ("base_app", "0005_rename_uploadedfile_datafile_alter_datafile_options"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='datafile',
-            options={'verbose_name': 'Data File', 'verbose_name_plural': 'Data Files'},
+            name="datafile",
+            options={"verbose_name": "Data File", "verbose_name_plural": "Data Files"},
         ),
     ]

@@ -5,25 +5,56 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('base_app', '0002_remove_project_project_team_project_team_member_and_more'),
+        ("base_app", "0002_remove_project_project_team_project_team_member_and_more"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Participant',
+            name="Participant",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('participant_id', models.CharField(max_length=100, unique=True)),
-                ('gender', models.CharField(choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], max_length=1)),
-                ('date_of_birth', models.DateField()),
-                ('race', models.CharField(max_length=100)),
-                ('marital_status', models.CharField(choices=[('S', 'Single'), ('M', 'Married'), ('D', 'Divorced'), ('W', 'Widowed'), ('O', 'Other')], max_length=1)),
-                ('language', models.CharField(max_length=100)),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='base_app.project')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("participant_id", models.CharField(max_length=100, unique=True)),
+                (
+                    "gender",
+                    models.CharField(
+                        choices=[("M", "Male"), ("F", "Female"), ("O", "Other")],
+                        max_length=1,
+                    ),
+                ),
+                ("date_of_birth", models.DateField()),
+                ("race", models.CharField(max_length=100)),
+                (
+                    "marital_status",
+                    models.CharField(
+                        choices=[
+                            ("S", "Single"),
+                            ("M", "Married"),
+                            ("D", "Divorced"),
+                            ("W", "Widowed"),
+                            ("O", "Other"),
+                        ],
+                        max_length=1,
+                    ),
+                ),
+                ("language", models.CharField(max_length=100)),
+                (
+                    "project",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="base_app.project",
+                    ),
+                ),
             ],
         ),
     ]

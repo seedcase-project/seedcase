@@ -9,6 +9,7 @@ from django.db.utils import IntegrityError
 from django.contrib.auth.models import User
 from ..settings import DATA_FILE_URL
 
+
 class BaseManager(models.Manager):
     """
     The purpose to overriding normal Manager behaviour is to support
@@ -27,20 +28,20 @@ class BaseModel(models.Model):
     Defines an abstract model built off of Django's Model class that
     provides some common fields that are useful across the application.
     """
+
     objects = BaseManager()
 
     time_created = models.DateTimeField(auto_now_add=True)
     time_modified = models.DateTimeField(auto_now=True, null=True)
     last_modified_by = models.ForeignKey(
         User,
-        related_name='%(app_label)s_%(class)s_related',  # avoid some reverse lookup clashes
+        related_name="%(app_label)s_%(class)s_related",  # avoid some reverse lookup clashes
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
     )
 
     def save(self, *args, **kwargs):
-
         # Check the unique_together constraints with any case
         # need to do manually to enforce the ability to have any case
         try:
@@ -59,8 +60,8 @@ class BaseModel(models.Model):
             return
         try:
             result = type(self).objects.filter(**kwargs).exclude(id=self.id)
-            if (len(result) > 0):
-                raise IntegrityError('Entry already exists %s' % str(kwargs))
+            if len(result) > 0:
+                raise IntegrityError("Entry already exists %s" % str(kwargs))
         except self.DoesNotExist:
             pass
 
@@ -74,29 +75,29 @@ class Address(models.Model):
     Designed to be subclassed with multiple inheritance by any model
     requiring an address.
     """
+
     address = models.CharField(
-        max_length=128, null=True, blank=True,
-        verbose_name='Address line 1'
+        max_length=128, null=True, blank=True, verbose_name="Address line 1"
     )
     address2 = models.CharField(
-        max_length=128, null=True, blank=True,
-        verbose_name='Address line 2'
+        max_length=128, null=True, blank=True, verbose_name="Address line 2"
     )
     city = models.CharField(max_length=32, null=True, blank=True)
     province = models.CharField(
-        max_length=32, null=True, blank=True,
-        help_text='Full province name'
+        max_length=32, null=True, blank=True, help_text="Full province name"
     )
     postal_code = models.CharField(max_length=16, null=True, blank=True)
     country = models.CharField(
-        max_length=2, null=True, blank=True,
-        help_text='ISO 3166-1 two-letter country code'
+        max_length=2,
+        null=True,
+        blank=True,
+        help_text="ISO 3166-1 two-letter country code",
     )
 
     class Meta:
         abstract = True
-        verbose_name = 'Address'
-        verbose_name_plural = 'Addresses'
+        verbose_name = "Address"
+        verbose_name_plural = "Addresses"
 
     def __str__(self):
         return self.get_full_address()
@@ -111,7 +112,7 @@ class Address(models.Model):
         if self.address2:
             fields_to_display.append(self.address2)
         if self.city and self.province:
-            fields_to_display.append('%s, %s' % (self.city, self.province))
+            fields_to_display.append("%s, %s" % (self.city, self.province))
         elif self.city:
             fields_to_display.append(self.city)
         elif self.province:
@@ -120,12 +121,14 @@ class Address(models.Model):
             fields_to_display.append(self.country)
         if self.postal_code:
             fields_to_display.append(self.postal_code)
-        return '\n'.join(fields_to_display)
+        return "\n".join(fields_to_display)
+
 
 class DataFile(models.Model):
     """
     Store and return the uploaded the data files info
     """
+
     file = models.FileField(upload_to=DATA_FILE_URL)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 

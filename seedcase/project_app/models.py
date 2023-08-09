@@ -14,17 +14,17 @@ class Participant(models.Model):
 
     # TODO add more choices
     GENDER_CHOICES = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-        ('O', 'Other'),
+        ("M", "Male"),
+        ("F", "Female"),
+        ("O", "Other"),
     )
 
     MARITAL_STATUS_CHOICES = (
-        ('S', 'Single'),
-        ('M', 'Married'),
-        ('D', 'Divorced'),
-        ('W', 'Widowed'),
-        ('O', 'Other'),
+        ("S", "Single"),
+        ("M", "Married"),
+        ("D", "Divorced"),
+        ("W", "Widowed"),
+        ("O", "Other"),
     )
 
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
