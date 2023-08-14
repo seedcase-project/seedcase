@@ -1,23 +1,17 @@
-# Install necessary Python packages
-install-py-deps:
-  python3 -m pip install -r seedcase/requirements.txt
+default:
+    @just --list --unsorted
 
-# Start up the docker container (with build)
-start-docker:
-  docker compose -f docker-compose.yml up -d --build
+# Run Python code styler.
+style-python:
+  # From https://black.readthedocs.io/en/stable/usage_and_configuration/black_docker_image.html
+  docker run \
+    --rm \
+    --volume $(pwd):/py-style \
+    --workdir /py-style \
+    pyfound/black:latest_release \
+    black .
 
-# Close the docker container
-stop-docker:
-  docker compose -f docker-compose.yml down
+# Generate PNG images from PlantUML files
+generate-puml:
+  docker run --rm -v $(pwd):/puml -w /puml ghcr.io/plantuml/plantuml:latest -tpng "**/*.puml"
 
-# Resume running docker container (without build)
-resume-docker:
-  docker compose -f docker-compose.yml up -d
-
-# Install any necessary packages for development
-install-dev-py-deps:
-  python3 -m pip install black
-
-# Run Python code formatter
-format-python:
-  python3 -m black ./

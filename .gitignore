@@ -1,17 +1,38 @@
-# Filtering out IDE specific folders
+# Development files and folders
+_ignore
+bin/
+dev/
+
+# Temporary files
+*.tmp
+
+# Any IDE specific folders
 .idea
 
-# Don't include the env files
+# Any .env files
 .env
 .env.*
 **/.env.*
 
-# Ignore mac files
+# Python venv folder
+venv
+
+# MacOS specific files
 .DS_Store
 
-# Ignore R project files
+# R specific files
+.Rbuildignore
+.Rhistory
+.RData
 .Rproj.user
-*.Rproj
+
+# Quarto files
+/.quarto/
+
+# Site files
+_site
+_book
+public
 
 # Ignore test coverages and results
 htmlcov/
@@ -19,5 +40,5 @@ junit/
 coverage.xml
 .coverage
 
-# Ignore local data files
-seedcase/datafile/*
+# Local data files
+**/datafile/*
