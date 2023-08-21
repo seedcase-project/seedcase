@@ -18,7 +18,7 @@ class ObservationalUnitAdmin(admin.ModelAdmin):
         "collection_datetime",
         "project"
     )
-    list_filter = ("project")
+    list_filter = ("project", )
 
     def get_queryset(self, request):
         """
