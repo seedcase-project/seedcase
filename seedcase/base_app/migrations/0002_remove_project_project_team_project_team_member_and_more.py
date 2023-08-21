@@ -5,25 +5,28 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('base_app', '0001_initial'),
+        ("base_app", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='project',
-            name='project_team',
+            model_name="project",
+            name="project_team",
         ),
         migrations.AddField(
-            model_name='project',
-            name='team_member',
-            field=models.ManyToManyField(blank=True, related_name='team_members', to=settings.AUTH_USER_MODEL),
+            model_name="project",
+            name="team_member",
+            field=models.ManyToManyField(
+                blank=True, related_name="team_members", to=settings.AUTH_USER_MODEL
+            ),
         ),
         migrations.AlterField(
-            model_name='project',
-            name='stakeholder',
-            field=models.ManyToManyField(blank=True, related_name='stake_holders', to='base_app.organization'),
+            model_name="project",
+            name="stakeholder",
+            field=models.ManyToManyField(
+                blank=True, related_name="stake_holders", to="base_app.organization"
+            ),
         ),
     ]
