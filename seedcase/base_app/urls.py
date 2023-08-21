@@ -21,7 +21,6 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from .views import home_page, organization_list, project_list, all_organizations
 from .views import data_files
-from project_app.urls import urlpatterns as project_app_urls
 from .settings import DATA_FILE_URL, DATA_FILE_ROOT
 
 # Setup default API View
