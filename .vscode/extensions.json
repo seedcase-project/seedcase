@@ -4,9 +4,7 @@
 
 	// List of extensions which should be recommended for users of this workspace.
 	"recommendations": [
-	  "vstirbu.vscode-mermaid-preview",
-	  "bierner.markdown-mermaid",
-	  "jebbs.plantuml",
+		"jebbs.plantuml",
 		"batisteo.vscode-django",
 		"DavidAnson.vscode-markdownlint",
 		"donjayamanne.githistory",
@@ -17,7 +15,7 @@
 		"ms-python.vscode-pylance",
 		"njpwerner.autodocstring",
 		"quarto.quarto",
-		"jebbs.plantuml"
+		"streetsidesoftware.code-spell-checker"
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
 	"unwantedRecommendations": [
