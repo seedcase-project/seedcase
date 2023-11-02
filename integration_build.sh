@@ -13,7 +13,7 @@ fail_build() {
 
 clean_up() {
     # Stop and remove all containers and images
-    docker compose -f docker-compose.yml down -v --rmi all
+    docker compose down -v --rmi all
 }
 
 wait_for() {
@@ -29,17 +29,17 @@ wait_for() {
 echo "Start Integration Build ..."
 
 # Build the environment
-docker compose -f docker-compose.yml build || fail_build "Build"
+docker compose build || fail_build "Build"
 
 # Start the environment
-docker compose -f docker-compose.yml up -d || fail_build "Deployment"
+docker compose up -d || fail_build "Deployment"
 
 # Use health check to make sure the container is ready
 wait_for "seedcase_webapp"
 
 echo "Run unit test"
 # Run unit tests in app container
-docker compose -f docker-compose.yml exec -T web pytest || fail_build "Unit
+docker compose exec -T web pytest || fail_build "Unit
 Tests"
 
 echo "Seedcase is ready to use!"

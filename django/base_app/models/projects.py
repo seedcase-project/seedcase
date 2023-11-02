@@ -19,7 +19,7 @@ class Project(BaseModel):
     """
 
     name = models.CharField(max_length=150, unique=True, null=False)
-    description = models.TextField(max_length=500, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
     stakeholder = models.ManyToManyField(
         Organization, blank=True, related_name="stake_holders"
     )

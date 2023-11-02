@@ -3,33 +3,64 @@ Synopsis: Test file for the Organization Models
 """
 
 import pytest
-from base_app.models.organizations import *
+from base_app.models import OrganizationType, Organization
 
 
 @pytest.mark.django_db
 def test_organization_creation():
-    """
-    Test that the organization is created correctly.
-    """
-    org_type = OrganizationType.objects.create(
-        name="University", description="University organization"
+    organization = Organization.objects.create(
+        name="Test Organization",
+        note="Test organization note",
     )
-    org = Organization.objects.create(
-        name="Test Organization", note="This is a test organization"
+    assert organization.name == "Test Organization"
+    assert organization.note == "Test organization note"
+
+
+@pytest.mark.django_db
+def test_organization_str_method():
+    organization = Organization.objects.create(name="Org Name")
+    assert str(organization) == "Org Name"
+
+
+@pytest.mark.django_db
+def test_add_organization_type_to_organization():
+    organization_type = OrganizationType.objects.create(name="Test Type")
+    organization = Organization.objects.create(name="Test Organization")
+    organization.types.add(organization_type)
+    assert organization.types.count() == 1
+
+
+@pytest.mark.django_db
+def test_organization_unique_name_and_address_constraint():
+    organization1 = Organization.objects.create(
+        name="Test Org",
+        address="123 Main St"
     )
-    org.types.add(org_type)
-    assert org.name == "Test Organization"
-    assert org.note == "This is a test organization"
-    assert org.types.count() == 1
+    with pytest.raises(Exception):
+        organization2 = Organization.objects.create(
+            name="Test Org",
+            address="123 Main St"
+        )
 
 
 @pytest.mark.django_db
 def test_organization_type_creation():
-    """
-    Test that organization type is created correctly.
-    """
-    org_type = OrganizationType.objects.create(
-        name="University", description="University organization"
+    organization_type = OrganizationType.objects.create(
+        name="Test Type",
+        description="Test type description",
     )
-    assert org_type.name == "University"
-    assert org_type.description == "University organization"
+    assert organization_type.name == "Test Type"
+    assert organization_type.description == "Test type description"
+
+
+@pytest.mark.django_db
+def test_organization_type_str_method():
+    organization_type = OrganizationType.objects.create(name="Type Name")
+    assert str(organization_type) == "Type Name"
+
+
+@pytest.mark.django_db
+def test_organization_type_unique_name_constraint():
+    organization_type1 = OrganizationType.objects.create(name="Test Type")
+    with pytest.raises(Exception):
+        organization_type2 = OrganizationType.objects.create(name="Test Type")

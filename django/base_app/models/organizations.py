@@ -7,10 +7,6 @@ This file contains the base app organization model
 from django.db import models
 from .base_models import BaseModel, Address
 
-import logging
-
-log = logging.getLogger(__name__)
-
 
 class OrganizationType(BaseModel):
     """

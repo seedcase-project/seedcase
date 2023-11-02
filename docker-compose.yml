@@ -3,7 +3,7 @@ version: "3.9"
 services:
   web:
     build:
-      context: ./seedcase
+      context: ./django
     image: seedcase
     container_name: seedcase_webapp
     command: python manage.py runserver 0.0.0.0:8080

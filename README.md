@@ -57,14 +57,14 @@ Linux):
 <!-- TODO: What is root for Mac or Windows? -->
 
 ``` bash
-docker compose -f docker-compose.yml up -d --build
+docker compose up -d --build
 ```
 
 Docker will then try to download all the required packages, make an
 image to the local computer, and try to run it. Once done, it should
 print something like:
 
-```         
+```
 ⠿ Container demo_version_containers-db-1          Started       0.3s
 ⠿ Container django_webapp                         Started       0.5s
 ```
@@ -85,7 +85,7 @@ could try to add more data.
 To stop the container, while in the main `seedcase/` folder, run:
 
 ``` bash
-docker compose -f docker-compose.yml down
+docker compose down
 ```
 
 It will stop and remove all the containers, but all the data will be
@@ -94,7 +94,7 @@ command like above except without the `--build`, since you've already
 built the image.
 
 ``` bash
-docker compose -f docker-compose.yml up -d
+docker compose up -d
 ```
 
 ## Build and run tests
