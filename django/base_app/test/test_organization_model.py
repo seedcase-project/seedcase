@@ -12,8 +12,8 @@ def test_organization_creation():
         name="Test Organization",
         note="Test organization note",
     )
-    assert organization.name == "Test Organization"
-    assert organization.note == "Test organization note"
+    assert organization.name == "Test Organization 1"
+    assert organization.note == "Test organization 1 note"
 
 
 @pytest.mark.django_db
@@ -27,7 +27,7 @@ def test_add_organization_type_to_organization():
     organization_type = OrganizationType.objects.create(name="Test Type")
     organization = Organization.objects.create(name="Test Organization")
     organization.types.add(organization_type)
-    assert organization.types.count() == 1
+    assert organization.types.count() == 2
 
 
 @pytest.mark.django_db
@@ -49,14 +49,14 @@ def test_organization_type_creation():
         name="Test Type",
         description="Test type description",
     )
-    assert organization_type.name == "Test Type"
-    assert organization_type.description == "Test type description"
+    assert organization_type.name == "Test Type 1"
+    assert organization_type.description == "Test 1 type description"
 
 
 @pytest.mark.django_db
 def test_organization_type_str_method():
     organization_type = OrganizationType.objects.create(name="Type Name")
-    assert str(organization_type) == "Type Name"
+    assert str(organization_type) == "Type Name 1"
 
 
 @pytest.mark.django_db
