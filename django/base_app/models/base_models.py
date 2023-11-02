@@ -7,7 +7,6 @@ This file contains the base app defaul base django model
 from django.db import models
 from django.db.utils import IntegrityError
 from django.contrib.auth.models import User
-from ..settings import DATA_FILE_URL
 
 
 class BaseManager(models.Manager):
@@ -35,19 +34,17 @@ class BaseModel(models.Model):
     time_modified = models.DateTimeField(auto_now=True, null=True)
     last_modified_by = models.ForeignKey(
         User,
-        related_name="%(app_label)s_%(class)s_related",  # avoid some reverse lookup clashes
+        related_name="%(app_label)s_%(class)s_related",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
     )
 
     def save(self, *args, **kwargs):
-        # Check the unique_together constraints with any case
-        # need to do manually to enforce the ability to have any case
         try:
             for unique_set in type(self)._meta.unique_together:
-                get_args = {}
                 for attr in unique_set:
+                    get_args = {}
                     get_args[attr] = getattr(self, attr, None)
                 self._check_db_for_duplicate(get_args)
         except TypeError:
@@ -91,7 +88,7 @@ class Address(models.Model):
         max_length=2,
         null=True,
         blank=True,
-        help_text="ISO 3166-1 two-letter country code",
+        help_text="ISO two-letter country code",
     )
 
     class Meta:
@@ -122,19 +119,3 @@ class Address(models.Model):
         if self.postal_code:
             fields_to_display.append(self.postal_code)
         return "\n".join(fields_to_display)
-
-
-class DataFile(models.Model):
-    """
-    Store and return the uploaded the data files info
-    """
-
-    file = models.FileField(upload_to=DATA_FILE_URL)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.file.name
-
-    class Meta:
-        verbose_name = "Data File"
-        verbose_name_plural = "Data Files"
