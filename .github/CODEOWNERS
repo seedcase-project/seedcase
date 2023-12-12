@@ -1,2 +1,10 @@
-# All team members get added to review PRs
-* @K-Beicher @lwjohnst86 @rqding @signekb
+# All members on Developers team get added to review PRs
+* @seedcase-project/developers
+
+# Ignore these so we don't get added to sync PRs
+/.github/
+/.vscode/
+/.devcontainer/
+justfile
+.editorconfig
+.gitignore
